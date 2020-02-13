@@ -1,5 +1,5 @@
 <template>
-  <div id="container">
+  <div id="app">
     <header id="header">
       <div id="head" class="parallax" parallax-speed="1" style="background-position: center -23px;">
         <h1 id="logo" class="text-center">
@@ -9,38 +9,24 @@
         </h1>
       </div>
     </header>
-    <div class="container">
-      <div class="row">
-        <div class="text-center">
-          <h6 class="text-muted">Dog Breed with Images</h6>
-          <ul class="list-group">
-            <dog-breed-list></dog-breed-list>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <router-view />
   </div>
+
 </template>
 
 <script>
-  import DogBreedList from './components/DogBreedList.vue'
+
   export default {
-    name: 'App',
-    components: {
-      DogBreedList
-    }
+    name: 'app',
   }
 </script>
 
 <style>
+
   @import url(https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css);
   body{
     padding: 2rem 0rem;
   }
-  .image-parent {
-    max-width: 40px;
-  }
-
   html {
     font-size: 100%;
   }
@@ -51,16 +37,8 @@
     color: #666666;
     padding: 0;
   }
-  .topspace {
-    margin-top: 40px;
-  }
-
-
-
-                                  HEADER
-
-
-  **********************************************************************/
+  HEADER
+  **********************************************************************
   #head {
     background: #f4f4f4;
     background-size: cover;
@@ -110,5 +88,4 @@
     font-size: 1rem;
     margin: 15px 0 0;
   }
-
 </style>

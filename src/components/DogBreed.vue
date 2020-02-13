@@ -9,55 +9,51 @@
 </template>
 
 <script>
-import DogBreedService from "../services/DogBreedService";
-import DogBreedImage from "./DogBreedImage";
-import _ from 'lodash'
-export default {
-    name: 'DogBreed',
-    components: {DogBreedImage},
-    data() {
-        return {
-            returnModel: [],
-            searchQuery: "",
-            isTyping: false,
-            searchResult: [],
-        }
-    },
-    methods: {
-        refreshDogBreeds() {
-            DogBreedService.getAllDogBreeds()
-                .then(data =>  {
-                    this.returnModel = Object.keys(data.data.message)
-                });
-
+    import DogBreedService from "../services/DogBreedService";
+    import DogBreedImage from "./DogBreedImage";
+    import _ from 'lodash'
+    export default {
+        name: 'DogBreed',
+        components: {DogBreedImage},
+        data() {
+            return {
+                returnModel: [],
+                searchQuery: "",
+                isTyping: false,
+                searchResult: [],
+            }
         },
-        searchBreed(searchQuery) {
-            this.returnModel =  this.returnModel.filter(item => {
-                return item.toLowerCase().includes(searchQuery.toLowerCase())
-            })
-        }
-    },
-    watch: {
-        searchQuery: _.debounce(function() {
-
-            if(this.searchQuery.length>0){
-                this.isTyping = false;
+        methods: {
+            refreshDogBreeds() {
+                DogBreedService.getAllDogBreeds()
+                    .then(data =>  {
+                        this.returnModel = Object.keys(data.data.message)
+                    });
+            },
+            searchBreed(searchQuery) {
+                this.returnModel =  this.returnModel.filter(item => {
+                    return item.toLowerCase().includes(searchQuery.toLowerCase())
+                })
             }
-        }, 500),
-        isTyping: function(value) {
-            if (!value) {
-                this.searchBreed(this.searchQuery);
-            }else{
-                this.refreshDogBreeds()
+        },
+        watch: {
+            searchQuery: _.debounce(function() {
+                if(this.searchQuery.length>0){
+                    this.isTyping = false;
+                }
+            }, 500),
+            isTyping: function(value) {
+                if (!value) {
+                    this.searchBreed(this.searchQuery);
+                }else{
+                    this.refreshDogBreeds()
+                }
             }
-        }
-    },
-    created(){
-    this.refreshDogBreeds();
+        },
+        created(){
+            this.refreshDogBreeds();
         }
     };
-
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

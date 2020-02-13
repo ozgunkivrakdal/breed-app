@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img :src="`${image}`" class="img-fluid"/>
+        <router-link :to="`/detail/${breedName}`"><img :src="`${image}`" class="img-fluid"></router-link>
     </div>
 </template>
 
@@ -11,24 +11,26 @@
         props:['breedName'],
         data() {
             return {
-                image: '',
+                image: ''
             }
         },
         methods: {
             getBreedImageUrl() {
-                  DogBreedService.getBreedImageUrl(this.breedName).then(data => {
+                DogBreedService.getBreedRandomImageUrl(this.breedName).then(data => {
                     this.image =  data.data.message;
                 });
-            }
+            },
         },
         created() {
-           this.getBreedImageUrl()
+            this.getBreedImageUrl()
         }
     }
-
-
 </script>
 
 <style scoped>
-
+    .img-fluid{
+        max-width: 500px;
+        height : auto;
+        flex:auto;
+    }
 </style>
