@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-link :to="`/detail/${breedName}`"><img :src="`${image}`" class="img-fluid"></router-link>
+        <router-link :to="`/detail/${breedName}`"><img :src="`${image}`" class="image" :style="{ width: '300px', height: '200px'}"></router-link>
     </div>
 </template>
 
@@ -28,9 +28,11 @@
 </script>
 
 <style scoped>
-    .img-fluid{
-        max-width: 500px;
-        height : auto;
-        flex:auto;
+    .image {
+        float: left;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        border: 1px solid #ebebeb;
     }
 </style>

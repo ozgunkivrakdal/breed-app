@@ -6,24 +6,49 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
 
     state: {
-        like: 20,
-        dislike:5
+        like: 100,
+        dislike:25,
+        isLiked :false,
+        isDisliked:false,
     },
 
     mutations: {
         incrementCounterLike (state, payload) {
-            state.like += payload
+            if(!state.isLiked){
+                state.like += payload
+                state.isLiked = true
+                if(state.isDisliked){
+                    state.dislike -= payload;
+                    state.isDisliked =false
+                }
+            }else{
+                state.like -= payload
+                state.isLiked = false
+
+            }
+
         },
         incrementCounterDislike (state, payload) {
-            state.dislike += payload
+            if(!state.isDisliked){
+                state.dislike += payload
+                state.isDisliked = true
+                if(state.isLiked){
+                    state.like -= payload
+                    state.isLiked = false
+                }
+            }else{
+                state.dislike -= payload
+                state.isDisliked = false
+
+            }
         }
     },
 
     actions: {
-        inrementActionLike ({commit}, payload) {
+        incrementActionLike ({commit}, payload) {
             commit('incrementCounterLike', payload)
         },
-        inrementActionDislike ({commit}, payload) {
+        incrementActionDislike ({commit}, payload) {
             commit('incrementCounterDislike', payload)
         }
     },

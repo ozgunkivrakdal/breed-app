@@ -11,6 +11,4 @@ class DogBreedDataService{
         return axios.get(`https://dog.ceo/api/breed/${name}/images`);
     }
 }
-
-
 export default new DogBreedDataService();
